@@ -1,0 +1,18 @@
+<div id="popUpMsg-bg" ng-show="showPopUpMsg">
+	<div id="popUpMsg">
+		<div class="close" ng-click="closePopUp()">x</div>
+		<div class="content">
+
+		Имя: {{popUpMsgContent.name}}
+		<br>
+		Годы жизни: {{popUpMsgContent.birthday}} - {{popUpMsgContent.dead}}
+		<br>
+		Стихотворение:
+		<br> 
+		<pre>{{popUpMsgContent.link}}</pre>
+		</div>
+			<button type="submit" class="btn btn-primary" ng-click="buy(popUpMsgContent.id)">Buy</button>
+			<p> </p>
+			<button type="submit" ng-click="closePopUp()">Close</button>
+	</div>
+</div>

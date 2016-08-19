@@ -21,11 +21,9 @@ var restApp = angular.module( 'restApp', ["ngRoute"] )
 
 .factory('poemsFactory', ['$http', '$q', function( $http, $q ){
 	var poemsApiUrl = "poems.json";
-
 	var poems = null;
 	var name = '';
 	var text = '';
-
 	return {
 		getPoems: function() {
 			var deferred = $q.defer();
@@ -37,17 +35,16 @@ var restApp = angular.module( 'restApp', ["ngRoute"] )
 				})
 				.error(function(data, status, headers, config) {
 					deferred.reject( 'Error in $http request' );
-					console.log( data );
-					console.log( status );
 				});
 			return deferred.promise;
 		}
 	}
 }])
 
-
 .controller( 'mainController', [ '$scope', function( $scope ){
 	$scope.hideSectionOne = false;
+	$scope.showShoppingCurt = false;
+	$scope.shopingCart = {};
 }])
 
 .controller( 'poemsListController', [ '$scope', 'poemsFactory',
@@ -57,20 +54,17 @@ var restApp = angular.module( 'restApp', ["ngRoute"] )
 			$scope.poemsForUI = myObj.poems;
 		});
 		$scope.showPopUpMsg = false;
+
 		$scope.openPopUp = function( text ) {
 		    $scope.showPopUpMsg = true;
 		    $scope.popUpMsgContent = text;
 		}
-
+		
 		$scope.buy = function(id)
 		{
-			if(!$scope.shopingCart && $scope.shopingCart.id){
-				$scope.shopingCart = {};
-				$scope.shopingCart.id =[];
-			}
-			$scope.shopingCart.id.push(id);
+			$scope.shopingCart[id] = 1 ;
 
-			alert("Спасибо за покупку!");
+			alert("Отличный выбор!");
 		}
 		
 }])

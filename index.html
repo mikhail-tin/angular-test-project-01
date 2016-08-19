@@ -29,12 +29,27 @@
                   <li><a href="#/main"> Index </a></li> 
                   <li><a href="#/about"> About </a></li>
                   <li><a href="#/contact"> Contact </a></li>
+                  <li><a href="" ng-click="showShoppingCurt = !showShoppingCurt">Shopping cart</a></li>
                 </ul>
               </div>
             </div>
         </div>
       </div>
     </div>
+
+
+    <section ng-show="showShoppingCurt">
+          <br>
+          <div class="alert container">
+            <h2>Список ваших покупок:</h2>
+            <p ng-show="!shopingCart">
+              Вы еще ничего не выбрали.
+            </p>
+            <p ng-show="shopingCart">
+              {{shopingCart.lenght()}}
+            </p>
+          </div>
+    </section>
 
     <!--BODY-->
     <!--SLIDES-->

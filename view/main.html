@@ -1,35 +1,31 @@
 	<div id="main" class="container">
-					<section>
-						<span>Use AngularJS. Please, click the button.</span> 
-            <button type="submit" ng-click="hideSectionOne = !hideSectionOne" class="btn btn-default">Purpose</button>
-            
-					</section>
+		<section>
+			<span>Use AngularJS. Please, click the button.</span> 
+			<button type="submit" ng-click="hideSectionOne = !hideSectionOne" class="btn btn-default">Purpose</button>
+		</section>
 
-					<section ng-if="hideSectionOne">
-					<br>
-					<div class="alert alert-success" role="alert">
-						<p>
-						The purpose this site is learning framework AngularJS and JavaScript.
-						Below you can find list poets. You can find the poet using input box "Find Author".
-						</p>
-					</div>
-					
-					</section>
-
-
-					<section >
-						<h2>Poets: <input type="text" class="span2 search-query" ng-model="$scope.query" placeholder="Find Author"></h2> 
-						<br>
-						<div ng-controller="poemsListController">
-							<div  ng-repeat="item in poemsForUI | filter: {name: $scope.query} ">
-							  <div class="hero-unit col-lg-3 col-md-4 col-sm-6">
-							  	<img  ng-click='openPopUp(item)' ng-src="images\persons/{{ item.image }}" class="img-rounded" "/>
-							    <h4 >{{item.name}} </h4>
-							    <button type="submit" class="btn btn-default" ng-click="buy(popUpMsgContent.id)">Buy</button>
-							    <p></p>
-							  </div>
-							</div>
-						    <pop-up-msg></pop-up-msg>
-						</div>
-					</section>
+		<section ng-if="hideSectionOne">
+		<br>
+		<div class="alert alert-success" role="alert">
+			<p>
+			The purpose this site is learning framework AngularJS and JavaScript.
+			Below you can find list poets. You can find the poet using input box "Find Author".
+			</p>
+		</div>
+		</section>
+		<section >
+			<h2>Poets: <input type="text" class="span2 search-query" ng-model="$scope.query" placeholder="Find Author"></h2> 
+			<br>
+			<div ng-controller="poemsListController">
+				<div  ng-repeat="item in poemsForUI | filter: {name: $scope.query} ">
+				  <div class="hero-unit col-lg-3 col-md-4 col-sm-6">
+				  	<img  ng-click='openPopUp(item)' ng-src="images\persons/{{ item.image }}" class="img-rounded" "/>
+				    <h4 >{{item.name}} </h4>
+				    <button type="submit" class="btn btn-default" ng-click="buy(popUpMsgContent.id)">Buy</button>
+				    <p></p>
+				  </div>
+				</div>
+			    <pop-up-msg></pop-up-msg>
 			</div>
+		</section>
+	</div>

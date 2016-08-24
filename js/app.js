@@ -41,10 +41,24 @@ var restApp = angular.module( 'restApp', ["ngRoute"] )
 	}
 }])
 
-.controller( 'mainController', [ '$scope', function( $scope ){
+.controller( 'mainController', [ '$scope', 'poemsFactory', function( $scope, poemsFactory ){
 	$scope.hideSectionOne = false;
 	$scope.showShoppingCurt = false;
 	$scope.shopingCart = {};
+
+	var allPoems = function(){
+		var myObj = poemsFactory.getPoems();
+		return myObj.poems;
+	}
+
+	var formedShopingCurtList = function(){
+		var allPoems = allPoems();
+		var result = _.filter(allPoems, function(item){ return item; })
+		return result;
+	}
+
+	$scope.shopingCart2 = formedShopingCurtList();
+
 }])
 
 .controller( 'poemsListController', [ '$scope', 'poemsFactory',

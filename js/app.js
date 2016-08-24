@@ -27,7 +27,6 @@ var restApp = angular.module( 'restApp', ["ngRoute"] )
 	return {
 		getPoems: function() {
 			var deferred = $q.defer();
-
 			$http({method: 'GET', url: poemsApiUrl})
 				.success(function(data){
 					poems = data;
@@ -46,19 +45,24 @@ var restApp = angular.module( 'restApp', ["ngRoute"] )
 	$scope.showShoppingCurt = false;
 	$scope.shopingCart = {};
 
-	var allPoems = function(){
-		var myObj = poemsFactory.getPoems();
-		return myObj.poems;
+	poemsFactory.getPoems().then(function( myObj ){
+			$scope.query = "";
+			$scope.poemsForShopingCurt = myObj.poems;
+		});
+
+	$scope.$watch('shopingCart', function(newValue, oldValue) {
+		if(newValue){
+  		$scope.shopingCart[newValue] = getShopingCurtItem(newValue);
+  		console.log('watchshopingCart');
+  		}
+	}, true);
+
+	var getShopingCurtItem = function(id){
+		for(i in $scope.poemsForShopingCurt)
+		{
+			console.log(i);
+		}
 	}
-
-	var formedShopingCurtList = function(){
-		var allPoems = allPoems();
-		var result = _.filter(allPoems, function(item){ return item; })
-		return result;
-	}
-
-	$scope.shopingCart2 = formedShopingCurtList();
-
 }])
 
 .controller( 'poemsListController', [ '$scope', 'poemsFactory',
@@ -76,11 +80,9 @@ var restApp = angular.module( 'restApp', ["ngRoute"] )
 		
 		$scope.buy = function(id)
 		{
-			$scope.shopingCart[id] = 1 ;
-
+			$scope.shopingCart[id] += 1 ;
 			alert("Отличный выбор!");
-		}
-		
+		}	
 }])
 
 .controller( 'ContactController', [ '$scope', function( $scope ){
